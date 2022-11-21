@@ -223,10 +223,10 @@ static int cert_write(SSLCert &certCtx, std::string dn, std::string validityFrom
     goto error_after_cert;
   }
 
-  // Initialize the serial number
+  // generate random serial number
   mbedtls_mpi_init( &serial );
-  stepRes = mbedtls_mpi_read_string( &serial, 10, "1" );
-  if (stepRes != 0) {
+  stepRes = mbedtls_mpi_fill_random( &serial, 10, mbedtls_ctr_drbg_random, &ctr_drbg );
+    if (stepRes != 0) {
     funcRes = HTTPS_SERVER_ERROR_CERTGEN_SERIAL;
     goto error_after_cert_serial;
   }

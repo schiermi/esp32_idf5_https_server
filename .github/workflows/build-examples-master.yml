@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - for-iotsa
 jobs:
   build-examples:
     strategy:

@@ -1,5 +1,6 @@
 #include "HTTPConnection.hpp"
-
+#include "mbedtls/base64.h"
+#include "mbedtls/sha1.h"
 namespace httpsserver {
 
 HTTPConnection::HTTPConnection(ResourceResolver * resResolver):

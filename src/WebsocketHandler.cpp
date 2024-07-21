@@ -1,7 +1,9 @@
 #include "WebsocketHandler.hpp"
+
 #ifndef TAG
-#define TAG "ARDUINO"
+static const char *TAG = "WebsocketHandler";
 #endif
+
 namespace httpsserver {
 
 /**
@@ -19,7 +21,7 @@ static void dumpFrame(WebsocketFrame frame) {
     case WebsocketHandler::OPCODE_TEXT: opcode = std::string("TEXT"); break;
   }
   ESP_LOGI(
-    "",
+    TAG,
     "Fin: %d, OpCode: %d (%s), Mask: %d, Len: %d",
     (int)frame.fin,
     (int)frame.opCode,

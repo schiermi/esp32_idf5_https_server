@@ -1,18 +1,10 @@
 # Changelog
 
-## [pending (master)](https://github.com/fhessel/esp32_https_server/tree/master)
+## [v1.1.0](https://github.com/jackjansen/esp32_idf5_https_server/tree/master)
 
-New functionality:
+- Compatible with ESP-IDF 5.0
+- Use esp-tls in stead of openssl
 
-–
-
-Bug fixes:
-
-–
-
-Breaking changes:
-
-–
 
 ## [v1.0.0](https://github.com/fhessel/esp32_https_server/releases/tag/v1.0.0)
 

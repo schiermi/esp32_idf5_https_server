@@ -1,6 +1,14 @@
-# ESP32 HTTPS Server
+# ESP32 HTTPS Server, IDF5 fork
 
-![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/fhessel/esp32_https_server?label=Version&sort=semver) ![Build Examples](https://github.com/fhessel/esp32_https_server/workflows/Build%20Examples/badge.svg?branch=master)
+This repository is a fork of `fhessel/esp32_https_server`. The only reason for its existence is that it seems _fhessel_ currently does not have the time to maintain `esp32_https_server`, and due to changes in the underlying Espressif frameworks such as `ESP_IDF` it has stopped working.
+
+This forked repository has just enough changes so that the library works. It is hoped that it will go away in the future (after a warning period) when `esp32_idf_server` maintainance is picked up again.
+
+In the following instructions
+
+- replace every mention of `esp32_https_server` with `esp32_idf5_https_server`
+
+## Original readme of esp32_https_server
 
 This repository contains an HTTPS server library that can be used with the [ESP32 Arduino Core](https://github.com/espressif/arduino-esp32). It supports HTTP as well.
 

@@ -4,10 +4,6 @@
 static const char *TAG = "WebsocketHandler";
 #endif
 
-#ifndef TAG
-static const char *TAG = "WebsocketHandler";
-#endif
-
 namespace httpsserver {
 
 /**

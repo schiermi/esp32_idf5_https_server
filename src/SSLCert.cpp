@@ -159,7 +159,12 @@ static int cert_write(SSLCert &certCtx, std::string dn, std::string validityFrom
   mbedtls_ctr_drbg_context ctr_drbg;
   mbedtls_pk_context key;
   mbedtls_x509write_cert crt;
-  mbedtls_mpi serial;
+  #if MBEDTLS_VERSION_NUMBER >= 0x03000000
+    const char *serial = "peer";
+  #else
+    mbedtls_mpi serial;
+  #endif
+
   unsigned char * primary_buffer;
   unsigned char *certOffset;
   unsigned char * output_buffer;
@@ -223,6 +228,9 @@ static int cert_write(SSLCert &certCtx, std::string dn, std::string validityFrom
     goto error_after_cert;
   }
 
+#if MBEDTLS_VERSION_NUMBER >= 0x03000000
+    mbedtls_x509write_crt_set_serial_raw(&crt, (unsigned char *) serial, strlen(serial));
+#else
   // generate random serial number
   mbedtls_mpi_init( &serial );
   stepRes = mbedtls_mpi_fill_random( &serial, 10, mbedtls_ctr_drbg_random, &ctr_drbg );
@@ -235,7 +243,7 @@ static int cert_write(SSLCert &certCtx, std::string dn, std::string validityFrom
     funcRes = HTTPS_SERVER_ERROR_CERTGEN_SERIAL;
     goto error_after_cert_serial;
   }
-
+#endif
   // Create buffer to write the certificate
   primary_buffer = new unsigned char[4096];
   if (primary_buffer == NULL) {
@@ -270,7 +278,9 @@ error_after_primary_buffer:
   delete[] primary_buffer;
 
 error_after_cert_serial:
+#if MBEDTLS_VERSION_NUMBER < 0x03000000
   mbedtls_mpi_free( &serial );
+#endif
 
 error_after_cert:
   mbedtls_x509write_crt_free( &crt );
